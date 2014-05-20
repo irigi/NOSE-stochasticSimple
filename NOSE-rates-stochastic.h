@@ -24,12 +24,17 @@ dpc gfunctMatsubara(double t, double lambda, double tauC, double temp);
 void init();
 void process();
 
+long g_linearity(dpcArray &gf);
+void output_rates(void);
+double rate3_quad(int donorMol, int acceptorMol, double elderTime, long timeIndex);
+
 class site {
 public:
-	site(int steps, int sites);
+	site(int sites);
 	~site();
 
 	dpcArray m_gf;
+	long m_gLinInd;  // g_function is quite linear after this index
 	double m_en, *m_J, m_lambda, m_tauC;
 	double **m_rates; // rates to all others
 	double ***m_rates3;
